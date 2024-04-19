@@ -1,0 +1,253 @@
+.success-alert {
+    padding: 20px;
+    background-color: rgba(0, 128, 0, 0.2); /* Warna hijau transparan */
+    color: #008000; /* Warna hijau */
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.error-alert {
+    padding: 20px;
+    background-color: rgba(255, 0, 0, 0.2); /* Warna merah transparan */
+    color: #ff0000; /* Warna merah */
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Style tombol penutup (close button) */
+.closebtn {
+    margin-left: 15px;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Hover effect pada tombol penutup (close button) */
+.closebtn:hover {
+    color: black;
+}
+
+.payment-status {
+    font-weight: bold;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.font-not-paid {
+    background-color: rgba(255, 0, 0, 0.2); /* Warna merah transparan */
+    color: #ff0000; /* Warna merah */
+}
+
+.font-paid {
+    background-color: rgba(0, 128, 0, 0.2); /* Warna hijau transparan */
+    color: #008000; /* Warna hijau */
+}
+.font-not-paid-yet {
+    background-color: rgba(255, 255, 0, 0.2); /* Warna kuning transparan */
+    color: #ffff00; /* Warna kuning */
+}
+
+.btn-custom-green1 {
+    background-color: rgb(100, 183, 32);
+    border-color: rgb(100, 183, 32);
+}
+
+/* Warna Border Left: Merah */
+.border-left-red {
+    border-left: 5px solid #ff5733; /* Red */
+}
+
+/* Warna Border Left: Biru */
+.border-left-blue {
+    border-left: 5px solid #3498db; /* Blue */
+}
+
+/* Warna Border Left: Hijau */
+.border-left-green {
+    border-left: 5px solid #2ecc71; /* Green */
+}
+
+/* Warna Border Left: Kuning */
+.border-left-yellow {
+    border-left: 5px solid #f1c40f; /* Yellow */
+}
+
+/* Warna Border Left: Ungu */
+.border-left-purple {
+    border-left: 5px solid #9b59b6; /* Purple */
+}
+
+/* Warna Border Left: Oranye */
+.border-left-orange {
+    border-left: 5px solid #ffa500; /* Orange */
+}
+
+/* Warna Border Left: Pink */
+.border-left-pink {
+    border-left: 5px solid #ffc0cb; /* Pink */
+}
+
+/* Warna Border Left: Abu-abu */
+.border-left-gray {
+    border-left: 5px solid #95a5a6; /* Gray */
+}
+
+/* Warna Border Left: Cyan */
+.border-left-cyan {
+    border-left: 5px solid #00ffff; /* Cyan */
+}
+
+/* Warna Border Left: Hitam */
+.border-left-black {
+    border-left: 5px solid #000000; /* Black */
+}
+
+/* Warna Border Left: Putih */
+.border-left-white {
+    border-left: 5px solid #ffffff; /* White */
+}
+
+/* Warna Border Left: Turquoise */
+.border-left-turquoise {
+    border-left: 5px solid #40e0d0; /* Turquoise */
+}
+
+/* Warna Border Left: Lavender */
+.border-left-lavender {
+    border-left: 5px solid #e6e6fa; /* Lavender */
+}
+
+/* Warna Border Left: Salmon */
+.border-left-salmon {
+    border-left: 5px solid #fa8072; /* Salmon */
+}
+
+/* Warna Border Left: Sky Blue */
+.border-left-sky-blue {
+    border-left: 5px solid #87ceeb; /* Sky Blue */
+}
+
+/* Warna Border Left: Gold */
+.border-left-gold {
+    border-left: 5px solid #ffd700; /* Gold */
+}
+
+/* Warna Border Left: Olive */
+.border-left-olive {
+    border-left: 5px solid #808000; /* Olive */
+}
+
+/* Warna Border Left: Coral */
+.border-left-coral {
+    border-left: 5px solid #ff7f50; /* Coral */
+}
+
+/* Warna Border Left: Teal */
+.border-left-teal {
+    border-left: 5px solid #008080; /* Teal */
+}
+
+.border-bottom-dongker {
+    border-bottom: 2px solid #343f52;
+}
+.text-dongker {
+    color: #343f52;
+}
+/* Warna Teks: Merah */
+.text-red {
+    color: #ff5733; /* Red */
+}
+
+/* Warna Teks: Biru */
+.text-blue {
+    color: #3498db; /* Blue */
+}
+
+/* Warna Teks: Hijau */
+.text-green {
+    color: #2ecc71; /* Green */
+}
+
+/* Warna Teks: Kuning */
+.text-yellow {
+    color: #f1c40f; /* Yellow */
+}
+
+/* Warna Teks: Ungu */
+.text-purple {
+    color: #9b59b6; /* Purple */
+}
+
+/* Warna Teks: Oranye */
+.text-orange {
+    color: #ffa500; /* Orange */
+}
+
+/* Warna Teks: Pink */
+.text-pink {
+    color: #ffc0cb; /* Pink */
+}
+
+/* Warna Teks: Abu-abu */
+.text-gray {
+    color: #95a5a6; /* Gray */
+}
+
+/* Warna Teks: Cyan */
+.text-cyan {
+    color: #00ffff; /* Cyan */
+}
+
+/* Warna Teks: Putih */
+.text-white {
+    color: #ffffff; /* White */
+}
+
+/* Warna Teks: Hitam */
+.text-black {
+    color: #000000; /* Black */
+}
+
+/* Warna Teks: Turquoise */
+.text-turquoise {
+    color: #40e0d0; /* Turquoise */
+}
+
+/* Warna Teks: Lavender */
+.text-lavender {
+    color: #e6e6fa; /* Lavender */
+}
+
+/* Warna Teks: Salmon */
+.text-salmon {
+    color: #fa8072; /* Salmon */
+}
+
+/* Warna Teks: Sky Blue */
+.text-sky-blue {
+    color: #87ceeb; /* Sky Blue */
+}
+
+/* Warna Teks: Gold */
+.text-gold {
+    color: #ffd700; /* Gold */
+}
+
+/* Warna Teks: Olive */
+.text-olive {
+    color: #808000; /* Olive */
+}
+
+/* Warna Teks: Coral */
+.text-coral {
+    color: #ff7f50; /* Coral */
+}
+
+/* Warna Teks: Teal */
+.text-teal {
+    color: #008080; /* Teal */
+}
