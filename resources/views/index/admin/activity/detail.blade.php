@@ -225,12 +225,7 @@
               <p class="mt-2 mb-0">Dibayar oleh: namaakun@gmail.com</p>
           </div>
       </div>
-      
-      
-      
-      
-      
-      
+
       </div>
     </div>
   </div>

@@ -57,7 +57,7 @@
                   <td>{{ $loop->iteration }}</td>
                   <td class="text-center">
                     @if($admin->image)
-                        <img src="{{ asset('img/admin/'.$admin->image) }}" alt="{{ $admin->name }}" width="50" height="50" style="max-width: 100%; height: auto;">
+                        <img src="{{ asset('img/user/'.$admin->image) }}" alt="{{ $admin->name }}" width="50" height="50" style="max-width: 100%; height: auto;">
                     @else
                         <span>No Image</span>
                     @endif
@@ -70,9 +70,6 @@
                   <td>
                   
                     <div class="mb-1 d-block" role="group">
-                      <a href="/admin/admins/{{ $admin->id }}/detail-admin" class="btn btn-sm btn-primary">
-                          <i class="bi bi-eye"></i>
-                      </a>
                       <a href="/admin/admins/{{ $admin->id }}/hapus-admin" class="btn btn-sm btn-danger">
                         <i class="bi bi-trash"></i>
                       </a>

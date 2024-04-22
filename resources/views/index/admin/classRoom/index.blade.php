@@ -63,7 +63,7 @@
                                 <div class="accordion-body">
                                   <ul>
                                       @forelse ($classRoom->students as $student)
-                                      <li>{{ $loop->iteration }}.{{ $student->name }}</li>
+                                      <li>{{ $loop->iteration }}.{{ $student->user->name }}-{{ $student->user->nisn }}</li>
                                       @empty
                                       Tidak Ada siswa
                                       @endforelse
@@ -79,7 +79,7 @@
                           <i class="bi bi-pencil"></i>  
                         </a>
                         <a href="/admin/classRoom/{{ $classRoom->id }}/hapus-kelas" class="btn btn-sm btn-danger">
-                            <i class="bi bi-eye"></i> 
+                          <i class="bi bi-trash"></i>
                         </a>
                       </div>
                    </td>

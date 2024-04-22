@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('activity_id');
+            $table->uuid('user_id');
+            $table->uuid('student_id');
+            $table->uuid('activity_id');
             $table->decimal('amount', 10, 2);
             $table->dateTime('payment_time')->nullable();
             $table->string('snap_token')->unique()->nullable();

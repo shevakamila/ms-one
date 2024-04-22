@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ActivitySeeder extends Seeder
 {
@@ -29,6 +30,7 @@ class ActivitySeeder extends Seeder
         // Loop untuk menambahkan data kegiatan
         foreach ($activities as $activity) {
             DB::table('activities')->insert([
+                'id' => Str::uuid(),
                 'name' => $activity,
                 'description' => fake()->paragraph,
                 'due_date' => fake()->dateTimeBetween('+1 week', '+1 month')->format('Y-m-d'),

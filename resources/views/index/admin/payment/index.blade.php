@@ -9,7 +9,6 @@
          <h6 class="m-0 font-weight-bold text-primary">Data Payment</h6>
        </div>
        <div class="card-body">
-        <a href="{{ route('pageFormAddStudent') }}" class = "btn btn-primary mb-3">Tambah Payment</a>
         @if (session()->has('success'))
         <div class="success-alert">
             <span class="closebtn" onclick="this.parentElement.style.display='none';" >&times;</span> 

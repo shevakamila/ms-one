@@ -13,6 +13,7 @@ use App\Http\Requests\Activity\ActivityUpdateRequest;
 use App\Models\Activity;
 use App\Models\ClassRoom;
 use App\Models\Student;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 class ActivityController extends Controller
@@ -40,6 +41,7 @@ class ActivityController extends Controller
         DB::beginTransaction();
         try {
             $validatedData = $request->validated();
+            $validatedData['id'] = Str::uuid();
             $activity = Activity::create($validatedData);
 
             if ($request->has('is_for_all_students')) {
@@ -100,7 +102,7 @@ class ActivityController extends Controller
             $activity->delete();
             DB::commit();
             // Redirect dengan pesan sukses
-            return redirect()->back()->with('success', 'Berhasil menghapus kegiatan.');
+            return redirect('/admin/activities')->with('success', 'Berhasil menghapus kegiatan.');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with([

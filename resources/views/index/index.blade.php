@@ -2,9 +2,9 @@
 
 @push('style')
 <style>
-    body{
+    /* body{
         background-color: #F0F8FF;
-    }
+    } */
     #beranda{
         min-height: 600px;
         padding-top: 60px;
@@ -132,7 +132,16 @@
                 <h1 class="text-dongker fw-semibold animated-text my-2">Welcome to <span class="text-primary">MS ONE </span> </h1>
                 <h3 class="text-dongker fw-semibold animated-text my-1 ">   <span class="text-primary">SMKN 1 DEPOK</span> </h3>
                 <p  class="animated-text mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere perferendis maxime porro ipsam placeat animi dolorem. Quasi ut quos illo fuga vero, asperiores nobis iusto distinctio officiis minus numquam obcaecati?</p>
+                @auth
+                 @if ($data['user']->role == 'student')
+                 <a href="/student/payment/list-payment " class="btn btn-primary animated-text py-2 px-5 mt-2">Cek Tagihan!</a>
+                 @else
+                 <a href="/pengguna/payment/list-payment" class="btn btn-primary animated-text py-2 px-5 mt-2">Cek Tagihan!</a>
+                 @endif
+                @endauth
+                @guest
                 <a href="/pengguna/payment/list-payment" class="btn btn-primary animated-text py-2 px-5 mt-2">Cek Tagihan!</a>
+                @endguest
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-6">

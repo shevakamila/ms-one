@@ -25,6 +25,6 @@ class CheckRole
                 }
             }
         }
-        return redirect()->route('unauthorized');
+        return redirect()->route('blank-page');
     }
 }

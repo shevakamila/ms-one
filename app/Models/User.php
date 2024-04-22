@@ -17,7 +17,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
+    protected $keyType = 'string';
+    public $incrementing = false;
+    protected $primaryKey = 'id';
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -48,5 +54,11 @@ class User extends Authenticatable
     public function student()
     {
         return $this->hasOne(Student::class);
+    }
+
+    public function payments()
+    {
+
+        return $this->hasMany(Payment::class);
     }
 }

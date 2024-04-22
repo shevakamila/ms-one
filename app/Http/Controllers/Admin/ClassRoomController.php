@@ -7,6 +7,7 @@ use App\Models\ClassRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ClassRoomController extends Controller
 {
@@ -27,6 +28,7 @@ class ClassRoomController extends Controller
             $validatedData = $request->validate([
                 'name' => 'required|string|max:225'
             ]);
+            $validatedData['id'] = Str::uuid();
             $classRoom = ClassRoom::create($validatedData);
             DB::commit();
             return redirect()->back()->with('success', 'kelas berhasil ditambahkan.');

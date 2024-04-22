@@ -134,7 +134,7 @@
         <div class="text-center container">
             <h1 class="mb-1 text-light">MS-ONE</h1>
             <p class="mb-4 text-light" style="font-size: 1.2rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, perferendis.</p>
-            <img src="{{ asset('img/asset/onedek-logo.jpg') }}" alt="" style="max-width: 100%; height: auto;">
+            {{-- <img src="{{ asset('img/asset/onedek-logo.jpg') }}" alt="" style="max-width: 100%; height: auto;"> --}}
         </div>
     </div>
 </div>

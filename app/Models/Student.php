@@ -8,12 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-    protected $fillable = ['nisn', 'gender', 'birthdate', 'class_room_id', 'user_id'];
+    protected $keyType = 'string';
+    public $incrementing = false;
+    protected $primaryKey = 'id';
+
+
+    protected $fillable = [
+        'id',
+        'nisn',
+        'gender', 'birthdate', 'class_room_id', 'user_id'
+    ];
 
     public function activities()
     {
         return $this->belongsToMany(Activity::class, "student_activities", "student_id", "activity_id")->withPivot('is_paid_off');
     }
+
+    public function activities_notRegistered()
+    {
+        return Activity::whereDoesntHave('students', function ($query) {
+            $query->where('student_id', $this->id);
+        });
+    }
+
 
 
     public function classRoom()

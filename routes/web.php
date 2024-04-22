@@ -10,10 +10,21 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Pengguna\ActivityController as PenggunaActivityController;
 use App\Http\Controllers\Pengguna\CheckActivityController;
 use App\Http\Controllers\Pengguna\PaymentController;
 use App\Http\Controllers\Pengguna\PaymentHistoryController;
+use App\Http\Controllers\Pengguna\ProfileController;
 use App\Http\Controllers\Student\HomeStudentController;
+
+
+
+
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\BlankPageController;
+use App\Http\Controllers\Student\PaymentController as StudentPaymentController;
+use App\Http\Controllers\Student\ProfileController as StudentProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,15 +40,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/unauthorized', function () {
-    return 'Unauthorized';
-})->name('unauthorized');
 // Route::get('/', function () {
 //     $data['user'] = Auth::user();
 //     return view('index.user.payment_invoice', compact('data'));
 // });
 Route::get('/', [IndexController::class, 'index'])->name('home');
-
+Route::get('/404', [BlankPageController::class, 'index'])->name('blank-page');
 Route::get('/page-login', [AuthController::class, 'pageLogin'])->name('pageLogin');
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -48,9 +56,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-Route::prefix('pengguna')->middleware(['auth'])->group(function () {
+Route::get('/about-us', [AboutUsController::class, 'index'])->name('pageAboutUs');
+Route::get('/list-kegiatan', [PenggunaActivityController::class, 'listActivity'])->name('pageListKegiatan');
+
+
+Route::prefix('pengguna')->middleware(['auth', 'checkRole:pengguna'])->group(function () {
 
     Route::get('/', [HomeStudentController::class, 'index'])->name('homePengguna');
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'pageProfile'])->name('pageProfile');
+        Route::post('/updateProfile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
+    });
 
     Route::prefix('payment')->group(function () {
         Route::get('/list-payment', [PaymentController::class, 'pageListPayment']);
@@ -66,9 +82,15 @@ Route::prefix('pengguna')->middleware(['auth'])->group(function () {
     });
 });
 
-Route::prefix('admin')->middleware([])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'checkRole:admin'])->group(function () {
 
     Route::get('/', [DashboardAdminControlller::class, 'index'])->name('homeAdmin');
+
+
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [AdminProfileController::class, 'pageProfile']);
+    });
+
 
     Route::prefix('pengguna')->group(function () {
         Route::get('/', [PenggunaController::class, 'index']);
@@ -92,10 +114,12 @@ Route::prefix('admin')->middleware([])->group(function () {
         Route::get('/', [StudentController::class, 'index']);
         Route::get('/page-tambah-siswa', [StudentController::class, 'pageFormStore'])->name('pageFormAddStudent');
         Route::post('/tambah-siswa', [StudentController::class, 'store']);
-        Route::get('/{student}/detail-siswa', [StudentController::class, 'show']);
+        Route::get('/{student}/detail-siswa', [StudentController::class, 'show'])->name('admin.studentDetail');
         Route::get('/{student}/hapus-siswa', [StudentController::class, 'delete']);
         Route::get('/{student}/update-siswa', [StudentController::class, 'pageFormUpdate']);
         Route::put('/{student}/update-siswa', [StudentController::class, 'update']);
+        Route::post('/{student}/tambah-kegiatan', [StudentController::class, 'addActivityToStudent'])->name('admin.addActivityToStudent');
+        Route::get('/{activity}/{student}/hapus-kegiatan-siswa', [StudentController::class, 'deleteActivityFromStudent'])->name('admin.deleteActivityFromStudent');
     });
     Route::prefix('activities')->group(function () {
         Route::get('/', [ActivityController::class, 'index']);
@@ -123,7 +147,21 @@ Route::prefix('admin')->middleware([])->group(function () {
 });
 
 
-Route::prefix('student')->group(function () {
+Route::prefix('student')->middleware(['auth', 'checkRole:student'])->group(function () {
 
-    Route::get('/', [HomeStudentController::class, 'index'])->name('homeStudent');
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [StudentProfileController::class, 'pageProfile'])->name('pageProfile');
+        Route::post('/updateProfile', [StudentProfileController::class, 'updateProfile'])->name('updateProfileStudent');
+        Route::post('/generate-new-unique-code', [StudentProfileController::class, 'generateNewUniqueCode'])->name('generateNewUniqueCode');
+    });
+
+    Route::prefix('payment')->group(function () {
+        Route::get('/list-payment', [StudentPaymentController::class, 'pageListPayment']);
+        Route::get('/payment-detail/{activity}/{student}', [StudentPaymentController::class, 'detailPayment']);
+        Route::get('/payment-detail/{activity}/{student}', [StudentPaymentController::class, 'detailPayment']);
+        Route::post('/payment-checkout', [StudentPaymentController::class, 'checkOut']);
+        Route::get('/payment-success/{payment}', [StudentPaymentController::class, 'successPayment'])->name('paymentSuccessStudent');
+        Route::get('/payment-batal/{payment}', [StudentPaymentController::class, 'batalPayment'])->name('paymentBatal');
+        Route::get('/payment-history', [StudentPaymentController::class, 'pageHistory']);
+    });
 });

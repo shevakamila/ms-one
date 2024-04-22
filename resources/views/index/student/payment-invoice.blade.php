@@ -83,6 +83,45 @@ a{
             <a class="btn btn-primary" href="/">Kembali Ke Home</a>
         </div>
     </div>
+    @elseif($data['payment']->status == 'failed')
+    <div class="card m-auto border-left-danger mt-5" style="max-width: 750px">
+        <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+            <h1 class="mb-0 fs-4">Detail Pembayaran</h1>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-6">
+                    <div class="info-section">
+                        <h5 class="info-title"><i class="fas fa-money-bill"></i> Jumlah Bayar:</h5>
+                        <p class="info-text text-success">Rp.{{  number_format($data['payment']->amount, 0, ',', '.')  }}</p>
+                    </div>
+                    <div class="info-section">
+                        <h5 class="info-title"><i class="fas fa-user"></i> Akun Pembayar:</h5>
+                        <p class="info-text text-muted">{{ $data['payment']->user->email }}</p>
+                    </div>
+                    <div class="info-section">
+                        <h5 class="info-title"><i class="fas fa-user-graduate"></i> Detail Siswa:</h5>
+                        <p class="info-text m-0">Nama : {{ $data['payment']->student->user->name }}</p>
+                        <p class="info-text m-0">Nisn : {{ $data['payment']->student->nisn }}</p>
+
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="info-section">
+                        <h5 class="info-title"><i class="fas fa-tasks"></i> Detail Kegiatan:</h5>
+                        <p class="info-text">Nama Kegiatan</p>
+                    </div>
+                    <div class="info-section">
+                        <h5 class="info-title">Status:</h5>
+                        <span class="badge bg-danger py-2 me-2">Pending</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-end bg-light">
+            <a class="btn btn-primary" href="/student/payment/list-payment">Kembali Ke Home</a>
+        </div>
+    </div>
     @else
     <div class="card m-auto border-left-warning mt-5" style="max-width: 750px">
         <div class="card-header bg-warning text-white d-flex justify-content-between align-items-center">
@@ -113,12 +152,13 @@ a{
                     </div>
                     <div class="info-section">
                         <h5 class="info-title">Status:</h5>
-                        <span class="badge bg-warning py-2 me-2">Pending</span>
+                        <span class="badge bg-warning py-2 me-2">Failed</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-footer d-flex justify-content-end bg-light">
+            <a href="/student/payment/payment-batal/{{ $data['payment']->id }}" class="btn btn-danger me-2">Batalkan Pembayaran</a>
             <button class="btn btn-primary" id="pay-button">Bayar Sekarang</button>
         </div>
     </div>
@@ -156,7 +196,7 @@ a{
         snap.pay("{{ $data['payment']->snap_token }}", {
           // Optional
           onSuccess: function(result){
-             window.location.href = "{{ route('paymentSuccess',['payment' => $data['payment'] ]) }}";
+             window.location.href = "{{ route('paymentSuccessStudent',['payment' => $data['payment'] ]) }}";
           },
           // Optional
           onPending: function(result){

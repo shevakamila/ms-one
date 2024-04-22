@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,6 +25,7 @@ class StudentSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             // Membuat pengguna baru
             $user = new User();
+            $user->id = Str::uuid();
             $user->name = 'Student ' . ($i + 1);
             $user->email = 'student' . ($i + 1) . '@example.com';
             $user->password = Hash::make('password');
@@ -31,6 +33,7 @@ class StudentSeeder extends Seeder
             $user->save();
             $classRoomId = $classRooms[array_rand($classRooms)];
             $student = new Student();
+            $student->id = Str::uuid();
             $student->nisn = 'NISN-' . Str::random(8);
             $student->birthdate = now()->subYears(rand(15, 20));
             $student->gender = rand(0, 1) ? 'male' : 'female';

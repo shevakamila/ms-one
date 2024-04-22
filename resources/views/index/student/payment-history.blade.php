@@ -56,9 +56,12 @@
                 <div class="d-flex align-items-center mb-2">
                     <i class="fas fa-tasks me-2" style="font-size: 20px;"></i>
                     <h5 class="card-title mb-0" style="font-size: 16px">{{ $payment->activity->name }}</h5>
+                    
                 </div>
                 <p class="card-text mb-0 text-muted" style="font-size: 13px">Rp. {{ number_format($payment->amount, 0, ',', '.') }}</p>
                 <p class="card-text mb-0 text-muted" style="font-size: 13px">{{ $payment->created_at->diffForHumans() }}</p>
+                <p class="card-text mb-0 text-muted" style="font-size: 13px">Email pembayar: {{ $payment->user->email }}</p>
+                
             </div>
             <div class="ms-3">
                 @if ($payment->status == 'paid')

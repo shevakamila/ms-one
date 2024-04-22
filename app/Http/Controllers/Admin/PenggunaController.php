@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserStoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class PenggunaController extends Controller
 {
     public function index()
     {
         $data = [];
+        $data['user'] = Auth::user();
         $data['pengguna'] = User::where('role', 'pengguna')->latest()->get();
         $data['active'] = 'pengguna';
         return view('index.admin.pengguna.index', compact('data'))->with(['success' => "Berhasil menampilkan semua data pengguna"]);
@@ -33,6 +36,7 @@ class PenggunaController extends Controller
 
         try {
             $user = new User();
+            $user->id = Str::uuid();
             $user->name = $request->name;
             $user->email = $request->email;
             $user->username = $request->username;

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class UserSeeder extends Seeder
     {
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
+            $user->id = Str::uuid();
             $user->name = 'User ' . ($i + 1);
             $user->email = 'user' . ($i + 1) . '@example.com';
             $user->username = 'Username' . ($i + 1);

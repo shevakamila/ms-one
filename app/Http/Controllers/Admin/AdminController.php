@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use stdClass;
 
 class AdminController extends Controller
@@ -42,6 +43,7 @@ class AdminController extends Controller
 
         try {
             $user = new User();
+            $user->id = Str::uuid();
             $user->name = $request->name;
             $user->email = $request->email;
             $user->username = $request->username;

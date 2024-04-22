@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\ClassRoom;
+use App\Models\Payment;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,6 +23,11 @@ class DashboardAdminControlller extends Controller
 
         $kelas_count = ClassRoom::all()->count();
         $kegiatan_count = Activity::all()->count();
+
+        $paymment_totalAmount = Payment::where('status', 'paid')->sum('amount');
+        $paymment_totalPaid = Payment::where('status', 'paid')->count();
+        $paymment_totalFailed = Payment::where('status', 'failed')->count();
+        $paymment_totalPending = Payment::where('status', 'pending')->count();
 
         $data = [
             'user' => Auth::user(),
@@ -61,6 +67,24 @@ class DashboardAdminControlller extends Controller
                 ]
 
             ],
+            'payment' => [
+                'total_amount' => [
+                    'title' => 'Total Uang Pembayaran',
+                    'count' => $paymment_totalAmount
+                ],
+                'total_paid' => [
+                    'title' => 'Total Pembayaran Succes',
+                    'count' => $paymment_totalPaid
+                ],
+                'total_failed' => [
+                    'title' => 'Total Pembayaran Failed',
+                    'count' => $paymment_totalFailed
+                ],
+                'total_pending' => [
+                    'title' => 'Total Pembayaran Pending',
+                    'count' => $paymment_totalPending
+                ],
+            ]
 
 
         ];

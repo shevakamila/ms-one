@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Pengguna;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Payment;
 use App\Models\Student;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -13,65 +14,31 @@ use Illuminate\Support\Facades\Auth;
 class PaymentController extends Controller
 {
 
-
     public function pageListPayment()
     {
+
         $data = [];
         $data['user'] = Auth::user();
-        $data['activities'] = [];
-        return view('index.user.payment-list', compact('data'));
+
+        $data['activities'] = $data['user']->student->activities;
+        return view('index.student.payment-list', compact('data'));
     }
-
-    public function checkPaymentList(Request $request)
-    {
-        $data['user'] = Auth::user();
-        $nisn = $request->nisn;
-
-        try {
-            $student = Student::where('nisn', $nisn)->firstOrFail();
-
-            if ($request->unique_code === $student->unique_code) {
-                $data['student'] = $student->load('activities');
-
-                return view('index.user.payment-list', compact('data'));
-            } else {
-                return redirect()->back()->with('error', 'Kode unik tidak valid.');
-            }
-        } catch (\Exception $e) {
-
-            return redirect()->back()->with('error', 'Siswa tidak ditemukan.');
-        }
-    }
-
-    // public function detailPayment2(Activity $activity, Student $student)
-    // {
-
-    //     $data['student'] = $student;
-    //     $data['activity'] = $student->load(['activities' => function ($query) use ($activity) {
-    //         $query->where('activity_id', $activity->id);
-    //     }]);
-    //     $data['totalAmountPayment'] = Payment::getTotalAmountPayment($student->id, $activity->id);
-    //     $data['totalAmountLess'] = Payment::getOutstandingAmountPayment($student->id, $activity->id);
-    //     $data['totalPayment'] =  Payment::getCountPayment($student->id, $activity->id);
-    //     $data['user'] = Auth::user();
-    //     return view('index.user.payment-detail', compact('data'));
-    // }
-
-
     public function detailPayment(Activity $activity, Student $student)
     {
 
         $data['student'] = $student;
         $data['activity'] = $activity;
         $data['user'] = Auth::user();
+
         $data['is_paid_off'] = $student->activities()->where('activity_id', $activity->id)->first()->pivot->is_paid_off;
-        return view('index.user.payment-detail', compact('data'));
+
+        $data['payment']['totalAmountPayment'] = $student->payments()->where('activity_id', $activity->id)->where('status', 'paid')->sum('amount');
+        $data['payment']['totalPaymentSuccess'] = $student->payments()->where('activity_id', $activity->id)->where('status', 'paid')->count();
+        $data['payment']['totalPaymentFailed'] = $student->payments()->where('activity_id', $activity->id)->where('status', 'failed')->count();
+
+
+        return view('index.student.payment-detail', compact('data'));
     }
-
-
-
-
-
 
     public function checkOut(Request $request)
     {
@@ -131,19 +98,12 @@ class PaymentController extends Controller
             $payment->snap_token = $snapToken;
             $payment->save();
             $data['payment'] = $payment;
-            return view('index.user.payment-invoice', compact('data'));
+            return view('index.student.payment-invoice', compact('data'));
         } catch (\Exception $e) {
-            dd($e->getMessage());
-            return redirect()->back()->with('error', $e->getMessage());
+
+            return redirect()->back()->with('error', 'Jaringan  internet anda sepertinya tidak stabil');
         }
     }
-
-    public function pageMidtrans()
-    {
-        $data['user'] = Auth::user();
-        return view('index.user.pay-midtrans');
-    }
-
 
     public function successPayment(Payment $payment)
     {
@@ -168,6 +128,35 @@ class PaymentController extends Controller
         }
         $data['user'] = Auth::user();
         $data['payment'] = $payment;
-        return view('index.user.payment-invoice', compact('data'));
+        return view('index.student.payment-invoice', compact('data'));
+    }
+
+    public function batalPayment(Payment $payment)
+    {
+        $payment->status = 'failed';
+        $payment->save();
+
+        return redirect('/student/payment/payment-history');
+    }
+    public function pageHistory()
+    {
+        $user = Auth::user();
+
+        $oneDayAgo = Carbon::now()->subDay();
+        $payments = Payment::where('user_id', $user->id)
+            ->where('status', 'pending')
+            ->where('created_at', '<=', $oneDayAgo)
+            ->get();
+
+        foreach ($payments as $payment) {
+            $payment->update(['status' => 'failed']);
+        }
+        $data['user'] = Auth::user();
+
+        $data['payment'] = Payment::with(['user.student', 'activity', 'student.user'])
+            ->where('student_id', $data['user']->id)
+            ->latest()
+            ->get();
+        return view('index.student.payment-history', compact('data'));
     }
 }

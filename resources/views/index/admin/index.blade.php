@@ -6,6 +6,82 @@
 
     <h1 class="h3 mb-0 text-gray-800 mb-4">Dashboard</h1>
 
+
+
+    <div class="row row-cols-1 row-col-md-2 row-cols-lg-4 row-cols-xl-4">
+
+        <div class="col mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-s font-weight-bold text-success text-uppercase mb-1">
+                                {{ $data['payment']['total_amount']['title'] }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-dark">{{ $data['payment']['total_amount']['count'] }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-user-graduate fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-s font-weight-bold text-warning text-uppercase mb-1">
+                                {{ $data['payment']['total_paid']['title'] }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-dark">{{ $data['payment']['total_paid']['count'] }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-user-pen fa-2x text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col mb-4">
+            <div class="card border-left-red shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-s font-weight-bold text-red text-uppercase mb-1">
+                                {{ $data['payment']['total_failed']['title'] }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-dark">{{ $data['payment']['total_failed']['count'] }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-user fa-2x text-red"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4">
+            <div class="card border-left-red shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-s font-weight-bold text-red text-uppercase mb-1">
+                                {{ $data['payment']['total_pending']['title'] }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-dark">{{ $data['payment']['total_pending']['count'] }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-solid fa-user fa-2x text-red"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
     <div class="row row-cols-1 row-col-md-2 row-cols-lg-3 row-cols-xl-3">
 
         <div class="col mb-4">
@@ -62,6 +138,8 @@
 
 
     </div>
+
+  
 
     <div class="row row-cols-2 row-col-md-2 row-cols-lg-3 row-cols-xl-3">
 

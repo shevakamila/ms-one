@@ -73,7 +73,7 @@ a{
                             <div>
                                 <p class="mb-0">Total dibayarkan:</p>
                                
-                                <p class="fw-semibold fs-5">{{ number_format($data['activity']->getTotalAmountPayment($data['student']->id,$data['activity']->id), 0, ',', '.') }}</p>
+                                <p class="fw-semibold fs-5">{{ number_format( $data['payment']['totalAmountPayment'], 0, ',', '.') }}</p>
                             </div>
                             <i class="fas fa-money-bill-alt fa-2x text-green"></i>
                         </div>
@@ -97,7 +97,7 @@ a{
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div>
                                 <p class="mb-0">Pembayaran Berhasil:</p>
-                                <p class="fw-semibold fs-5">{{ $data['activity']->getCountPayment($data['student']->id,$data['activity']->id) }}</p>
+                                <p class="fw-semibold fs-5">{{ $data['payment']['totalPaymentSuccess'] }}</p>
                             </div>
                             <i class="fas fa-check-circle fa-2x text-green"></i>
                         </div>
@@ -109,7 +109,7 @@ a{
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div>
                                 <p class="mb-0">Pembayaran Gagal:</p>
-                                <p class="fw-semibold fs-5">{{ number_format($data['activity']->getOutstandingAmountPayment($data['student']->id,$data['activity']->id), 0, ',', '.') }}</p>
+                                <p class="fw-semibold fs-5">{{ $data['payment']['totalPaymentFailed'] }}</p>
                             </div>
                             <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
                         </div>
@@ -137,7 +137,7 @@ a{
                         {{ session('error') }}
                     </div>
                     @endif
-                    <form action="/pengguna/payment/payment-checkout" method="post">
+                    <form action="/student/payment/payment-checkout" method="post">
                         @csrf
                         <input type="hidden" name="activity_id" value="{{ $data['activity']->id }}">
                         <input type="hidden" name="student_id" value="{{ $data['student']->id }}">
@@ -198,6 +198,7 @@ a{
     </div>
 </footer>
 
+
 <div class="modal fade" id="loadingModal" tabindex="-1" aria-labelledby="loadingModalLabel" aria-hidden="true" aria-labelledby="staticBackdropLabel" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -213,6 +214,7 @@ a{
         </div>
     </div>
 </div>
+
 @endsection
 
 

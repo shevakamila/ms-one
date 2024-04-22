@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('student_activities', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('activity_id');
+            $table->uuid('student_id');
+            $table->uuid('activity_id');
             $table->timestamps();
             $table->boolean('is_paid_off')->default(false);
             // Foreign keys
