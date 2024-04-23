@@ -65,6 +65,7 @@ class StudentController extends Controller
             $user->save();
 
             $student = new Student();
+            $student->id = Str::uuid();
             $student->nisn = $request->nisn;
             $student->birthdate = $request->birthdate;
             $student->class_room_id = $request->class_room_id;
@@ -82,7 +83,7 @@ class StudentController extends Controller
             return redirect('admin/students')->with('success', 'Siswa berhasil ditambahkan.');
         } catch (\Exception $e) {
             DB::rollback();
-
+            dd($e->getMessage());
             return redirect()->back()->withInput()->withErrors(['error' => 'Gagal menambahkan siswa. Silakan coba lagi.']);
         }
     }
