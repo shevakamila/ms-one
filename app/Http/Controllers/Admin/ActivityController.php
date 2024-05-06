@@ -42,6 +42,9 @@ class ActivityController extends Controller
         try {
             $validatedData = $request->validated();
             $validatedData['id'] = Str::uuid();
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('img/activity'), $imageName);
+            $validatedData['image'] = $imageName;
             $activity = Activity::create($validatedData);
 
             if ($request->has('is_for_all_students')) {
@@ -83,7 +86,7 @@ class ActivityController extends Controller
             $data['active'] = 'activities';
             return view('index.admin.activity.detail', compact('data'));
         } catch (\Exception $e) {
-            dd($e->getMessage());
+
             return redirect()->back()->with([
                 "error" => "Terjadi error server silakan kembali nanti",
                 "info" => $e->getMessage()
@@ -129,7 +132,12 @@ class ActivityController extends Controller
             if (!$activity) {
                 return redirect()->back()->with('error', 'Data kegiatan tidak ditemukan.');
             }
+
             $validatedData = $request->validated();
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('img/activity'), $imageName);
+            $validatedData['image'] = $imageName;
+
             $activity->update($validatedData);
             DB::commit();
 

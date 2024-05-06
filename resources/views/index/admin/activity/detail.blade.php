@@ -71,8 +71,8 @@
     <div class="card-body">
     
       <div class="row mt-2">
-        <div class="col-md-4">
-          <img src="{{ asset('img/asset/onedek-depan.jpg') }}" alt="Gambar Kegiatan" class="img-fluid rounded">
+        <div class="col-md-4 text-center">
+          <img src="{{ asset('img/activity/' .$data['activity']->image ) }}" alt="Gambar Kegiatan" class="img-fluid rounded">
         </div>
         <div class="col-md-8">
           <h3 class="card-title mb-4 fw-bold">{{ $data['activity']->name }}</h3> 
@@ -202,11 +202,7 @@
 
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
+{{-- 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md">
@@ -229,7 +225,8 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
+
 @endsection
 
 

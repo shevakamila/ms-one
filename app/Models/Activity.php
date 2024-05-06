@@ -13,6 +13,8 @@ class Activity extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
+        'image',
+        'is_active',
         'name',
         'description',
         'amount',

@@ -37,6 +37,7 @@
                   <th>Name</th>
                   <th>Tenggat Pembayaran</th>
                   <th>Biaya Kegiatan</th>
+                  <th>Status Kegiatan</th>
                   <th>Action</th>
                  </tr>
               </thead>
@@ -46,6 +47,7 @@
                   <th>Name</th>
                   <th>Tenggat Pembayaran</th>
                   <th>Biaya Kegiatan</th>
+                  <th>Status Kegiatan</th>
                   <th>Action</th>
                 </tr>
               </tfoot>
@@ -56,7 +58,14 @@
                   <td>{{ $activity->name }}</td>
                   <td>{{ date('d-M-Y', strtotime($activity->due_date)) }}</td>
  
- 
+                  <td class="text-center">
+                    @if ($activity->is_active == true)
+                    <span class="payment-status font-paid ">Active</span>
+    
+                    @else 
+                    <span class="payment-status font-not-paid">Not Active</span>
+                    @endif
+                  </td>
                   <td>Rp.{{ number_format($activity->amount, 0, ',', '.')  }}</td>
                   <td>
                     <!-- Baris pertama -->

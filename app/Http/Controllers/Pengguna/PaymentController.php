@@ -31,7 +31,10 @@ class PaymentController extends Controller
             $student = Student::where('nisn', $nisn)->firstOrFail();
 
             if ($request->unique_code === $student->unique_code) {
-                $data['student'] = $student->load('activities');
+                // $data['student'] = $student->load('activities');
+                $data['student'] = $student->load(['activities' => function ($query) {
+                    $query->where('is_active', 1);
+                }]);
 
                 return view('index.user.payment-list', compact('data'));
             } else {
@@ -133,8 +136,7 @@ class PaymentController extends Controller
             $data['payment'] = $payment;
             return view('index.user.payment-invoice', compact('data'));
         } catch (\Exception $e) {
-            dd($e->getMessage());
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', 'Jaringan  internet anda tidak stabil');
         }
     }
 

@@ -4,13 +4,22 @@
 
 
 <div class="container">
-    <form action="/admin/activities/tambah-kegiatan" method="post">
+    <form action="/admin/activities/tambah-kegiatan" method="post" enctype="multipart/form-data">
         <div class="card shadow mb-4">
             <div class="card-header">
                 <h3 class="m-0 font-weight-bold text-primary">Tambah Kegiatan</h3>
             </div>
             <div class="card-body">
                 @csrf
+                <div class="mb-3">
+                    <label for="image" class="form-label font-weight-bold">Gambar Kegiatan</label>
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" placeholder="Masukkan gambar kegiatan" value="{{ old('image') }}">
+                    @error('image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 <div class="mb-3">
                     <label for="name" class="form-label font-weight-bold">Nama Kegiatan</label>
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan nama kegiatan" value="{{ old('name') }}">
@@ -36,7 +45,7 @@
                 
                 
                 <div class="mb-3">
-                    <label for="due_date" class="form-label font-weight-bold">Tanggal Kegiatan</label>
+                    <label for="due_date" class="form-label font-weight-bold">Tenggat Pembayaran</label>
                     <input type="date" class="form-control @error('due_date') is-invalid @enderror" id="due_date" name="due_date" value="{{ old('due_date') }}">
                     @error('due_date')
                         <div class="invalid-feedback">

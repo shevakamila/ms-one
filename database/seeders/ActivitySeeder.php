@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Activity;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -29,14 +30,13 @@ class ActivitySeeder extends Seeder
 
         // Loop untuk menambahkan data kegiatan
         foreach ($activities as $activity) {
-            DB::table('activities')->insert([
+            Activity::create([
                 'id' => Str::uuid(),
                 'name' => $activity,
                 'description' => fake()->paragraph,
+                'image' => 'onedek_depan.jpg',
                 'due_date' => fake()->dateTimeBetween('+1 week', '+1 month')->format('Y-m-d'),
                 'amount' => fake()->numberBetween(10000, 1000000),
-                'created_at' => now(),
-                'updated_at' => now(),
             ]);
         }
     }

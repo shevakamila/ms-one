@@ -37,7 +37,7 @@
          <div class="card my-3">
             <div class="row flex-row-reverse">
                 <div class="col-12 col-md-4">
-                    <img src="{{ asset('img/asset/onedek-depan.jpg') }}" alt="" class="img-fluid">
+                    <img src="{{ asset('img/activity/' . $activity->image) }}" alt="" class="img-fluid">
                 </div>
                 <div class="col-12 col-md-8">
                     <div class="card-body">

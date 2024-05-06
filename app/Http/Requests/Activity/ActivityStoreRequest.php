@@ -24,6 +24,7 @@ class ActivityStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'amount' => 'required|numeric|min:0',
             'due_date' => 'required|date',
         ];

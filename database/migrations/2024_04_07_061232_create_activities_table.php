@@ -15,7 +15,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->string('image');
             $table->integer('amount');
+            $table->boolean('is_active')->default(true);
             $table->date('due_date');
             $table->timestamps();
         });

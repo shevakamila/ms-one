@@ -43,7 +43,7 @@ a{
       
     <div class="row">
         <div class="col-md-5">
-            <img src="{{ asset('img/asset/onedek-depan.jpg') }}" alt="Gambar Kegiatan" class="img-fluid rounded">
+            <img src="{{ asset('img/activity/'.$data['activity']->image) }}" alt="Gambar Kegiatan" class="img-fluid rounded">
         </div>
         <div class="col-md-7">
             <div class="card-body">

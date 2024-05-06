@@ -22,10 +22,12 @@ class ActivityUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'sometimes|required|string|max:255',
             'description' => 'nullable|string',
             'amount' => 'sometimes|required|numeric|min:0',
             'due_date' => 'sometimes|required|date',
+            'is_active' => 'sometimes|required|boolean',
         ];
     }
 }

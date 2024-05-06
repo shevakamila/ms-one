@@ -158,7 +158,7 @@ Route::prefix('student')->middleware(['auth', 'checkRole:student'])->group(funct
     Route::prefix('payment')->group(function () {
         Route::get('/list-payment', [StudentPaymentController::class, 'pageListPayment']);
         Route::get('/payment-detail/{activity}/{student}', [StudentPaymentController::class, 'detailPayment']);
-        Route::get('/payment-detail/{activity}/{student}', [StudentPaymentController::class, 'detailPayment']);
+        // Route::get('/payment-detail/{activity}/{student}', [StudentPaymentController::class, 'detailPayment']);
         Route::post('/payment-checkout', [StudentPaymentController::class, 'checkOut']);
         Route::get('/payment-success/{payment}', [StudentPaymentController::class, 'successPayment'])->name('paymentSuccessStudent');
         Route::get('/payment-batal/{payment}', [StudentPaymentController::class, 'batalPayment'])->name('paymentBatal');

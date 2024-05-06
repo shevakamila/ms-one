@@ -62,7 +62,7 @@
                 </div>
                 <div class="card-body">
                     @forelse ($data['activities'] as $activity)
-                    <a href="/student/payment/payment-detail/{{ $activity->id }}/{{ $data['user']->id }}" class="card mb-3 d-block text-decoration-none card-list-activity text-dark rounded-3 border">
+                    <a href="/student/payment/payment-detail/{{ $activity->id }}/{{ $data['user']->student->id }}" class="card mb-3 d-block text-decoration-none card-list-activity text-dark rounded-3 border">
                         <div class="card-body d-flex align-items-center">
                             <div class="flex-grow-1">
                                 <h5 class="card-title mb-1" style="font-size: 16px">{{ $activity->name }}</h5>

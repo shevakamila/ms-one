@@ -20,7 +20,7 @@ class PaymentController extends Controller
         $data = [];
         $data['user'] = Auth::user();
 
-        $data['activities'] = $data['user']->student->activities;
+        $data['activities'] = $data['user']->student->activities()->where('is_active', 1)->get();
         return view('index.student.payment-list', compact('data'));
     }
     public function detailPayment(Activity $activity, Student $student)
@@ -66,8 +66,6 @@ class PaymentController extends Controller
 
         try {
 
-
-
             $payment = new Payment();
             $payment->id = Str::uuid();
             $payment->student_id = $validatedData['student_id'];
@@ -101,7 +99,7 @@ class PaymentController extends Controller
             return view('index.student.payment-invoice', compact('data'));
         } catch (\Exception $e) {
 
-            return redirect()->back()->with('error', 'Jaringan  internet anda sepertinya tidak stabil');
+            return redirect()->back()->with('error', 'Jaringan  internet anda tidak stabil');
         }
     }
 
