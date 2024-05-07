@@ -119,6 +119,7 @@ a{
             </div>
         </div>
         <div class="card-footer d-flex justify-content-end bg-light">
+            <a href="/pengguna/payment/payment-batal/{{ $data['payment']->id }}" class="btn btn-danger me-2">Batalkan Pembayaran</a>
             <button class="btn btn-primary" id="pay-button">Bayar Sekarang</button>
         </div>
     </div>

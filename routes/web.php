@@ -76,7 +76,7 @@ Route::prefix('pengguna')->middleware(['auth', 'checkRole:pengguna'])->group(fun
         Route::post('/payment-checkout', [PaymentController::class, 'checkOut']);
 
         Route::get('/payment-success/{payment}', [PaymentController::class, 'successPayment'])->name('paymentSuccess');
-
+        Route::get('/payment-batal/{payment}', [PaymentController::class, 'batalPayment'])->name('paymentBatal');
 
         Route::get('/payment-history', [PaymentHistoryController::class, 'pageHistory']);
     });

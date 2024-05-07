@@ -147,6 +147,14 @@ class PaymentController extends Controller
     }
 
 
+    public function batalPayment(Payment $payment)
+    {
+        $payment->status = 'failed';
+        $payment->save();
+
+        return redirect('/user/payment/payment-history');
+    }
+
     public function successPayment(Payment $payment)
     {
         $user = Auth::user();
