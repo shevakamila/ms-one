@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -34,15 +35,16 @@ class AuthController extends Controller
                 $validatedData['image'] = $imageName;
             }
 
+            $validatedData['id'] = Str::uuid();
             $validatedData['role'] = 'pengguna';
-
             $user = User::create($validatedData);
             DB::commit();
             return redirect('page-login')->with('success', 'Registrasi account berhasil');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             DB::rollback();
 
-            return redirect()->back()->withInput()->withErrors(['error' => 'Gagal membuat account,silakan coba lagi nanti.']);
+            return redirect()->back()->withInput()->with(['error' => 'Gagal membuat account,silakan coba lagi nanti.']);
         }
     }
 
