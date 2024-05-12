@@ -31,6 +31,8 @@ class ActivityController extends Controller
     public function pageFormStore()
     {
         $data['user'] = Auth::user();
+
+
         $data['active'] = 'activities';
         return view('index.admin.activity.form', compact('data'));
     }

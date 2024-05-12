@@ -21,11 +21,11 @@ class StudentUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $studentId = $this->route('student')->id; // Dapatkan ID siswa yang sedang diperbarui
-
+        $studentId = $this->route('student')->id; //  ini tuh buat dapetin  ID siswa yang sedang diperbarui
+        $userId = $this->route('student')->user->id; // ini tuh buat dapetin ID user dari siswa yang sedang diperbarui
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:students,email,' . $studentId,
+            'email' => 'required|email|max:255|unique:users,email,' . $userId,
             'nisn' => 'required|string|max:20|unique:students,nisn,' . $studentId,
             'gender' => 'required|in:male,female',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Aturan validasi untuk gambar

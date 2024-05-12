@@ -169,7 +169,19 @@ class StudentController extends Controller
                 return redirect()->back()->with('error', 'Data siswa tidak ditemukan.');
             }
             $validatedData = $request->validated();
-            $student->update($validatedData);
+
+            // Perbarui data siswa
+            $student->update([
+                'nisn' => $validatedData['nisn'],
+                'birthdate' => $validatedData['birthdate'],
+                'class_room_id' => $validatedData['class_room_id'],
+                'gender' => $validatedData['gender']
+            ]);
+
+            $student->user->update([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+            ]);
             DB::commit();
 
             return redirect('admin/students/' . $student->id . "/detail-siswa")->with('success', 'Data siswa berhasil diperbarui.');

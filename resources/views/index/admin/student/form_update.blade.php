@@ -37,7 +37,7 @@
                             <span id="file-name"></span>
                         </div>
                         <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)" class="d-none">
-                        <label for="gambar-siswa" class="btn btn-primary btn-sm mb-0">Pilih Gambar</label>
+                        <label for="image" class="btn btn-primary btn-sm mb-0">Pilih Gambar</label>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label font-weight-bold">Nama siswa</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan nama siswa" value="{{ $data['student']['name'] }}">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan nama siswa" value="{{ $data['student']->user->name }}">
                         @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -69,7 +69,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label font-weight-bold">Email siswa</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Masukkan email siswa" value="{{ $data['student']['email'] }}">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Masukkan email siswa" value="{{ $data['student']->user->email}}">
                         @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
